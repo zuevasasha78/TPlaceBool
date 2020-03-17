@@ -1,4 +1,4 @@
-package com.trying.tplacebool
+package com.trying.tplacebool.ui
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -23,6 +23,7 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FetchPhotoRequest
 import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.PlacesClient
+import com.trying.tplacebool.R
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
