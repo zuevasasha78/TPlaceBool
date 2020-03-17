@@ -59,7 +59,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun setupPlacesClient() {
-        Places.initialize(applicationContext, " AIzaSyAvJSLNFiiRD_G-hiGrnSTJf_7Jtvo3tks")
+        Places.initialize(applicationContext, "AIzaSyAvJSLNFiiRD_G-hiGrnSTJf_7Jtvo3tks")
         placesClient = Places.createClient(this)
     }
 
