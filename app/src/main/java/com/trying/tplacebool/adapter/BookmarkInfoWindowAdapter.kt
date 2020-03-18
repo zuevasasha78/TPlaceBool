@@ -24,6 +24,4 @@ class BookmarkInfoWindowAdapter(context: Activity) : GoogleMap.InfoWindowAdapter
     override fun getInfoWindow(p0: Marker?): View? {
         return null
     }
-
-
 }

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -24,11 +25,14 @@ import com.google.android.libraries.places.api.net.FetchPhotoRequest
 import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.trying.tplacebool.R
+import com.trying.tplacebool.adapter.BookmarkInfoWindowAdapter
+import com.trying.tplacebool.viewmodel.MapsViewModel
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var map: GoogleMap
     private lateinit var placesClient: PlacesClient
+    private lateinit var mapViewModel: MapsViewModel
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,10 +57,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
+        setupMapListener()
+        setupViewModel()
         getCurrentLocation()
-        map.setOnPoiClickListener {
-            displayPoi(it)
-        }
     }
 
     private fun setupPlacesClient() {
@@ -190,8 +193,20 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         )
     }
 
+    fun setupViewModel() {
+        mapViewModel = ViewModelProviders.of(this).get(MapsViewModel::class.java)
+    }
+    fun setupMapListener(){
+        map.setInfoWindowAdapter(BookmarkInfoWindowAdapter(this))
+        map.setOnPoiClickListener {
+            displayPoi(it)
+        }
+    }
+
     companion object {
         private const val REQUEST_LOCATION = 1
         private const val TAG = "MapActivity"
     }
+
+    class PlaceInfo(val place: Place? = null, valimage : Bitmap? = null)
 }
